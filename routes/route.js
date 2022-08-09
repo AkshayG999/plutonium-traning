@@ -15,24 +15,27 @@ router.get('/students', function (req, res){
     res.send(students)
 })
 
+//problem no 1
 router.get('/movies', function (req, res){
     let movies = ['Don', 'Kammine', 'Shole','Doom','Tarjan','Bahubali']
     res.send(movies)
 })
 
+//Problem No 2
 router.get('/movies/:indexNumber', function (req, res){
     let arr=['Don', 'Kammine', 'Shole','Doom','Tarjan','Bahubali']
     //  const arrayLenght=arr.length       //array ki lenght find karke "arrayLenght" me dali.
      const moviesIndex=arr[req.params.indexNumber] //
      if(req.params.indexNumber>arr.length)
      {
+        //Problem No 3
         res.send("Please Enter Valid Number...")
      }
      res.send(moviesIndex)
     
 })
 
-
+   // Problem No 4
 router.get('/films', function(req, res){//(/films--path parameter)
     let films= [ {
         id: 1,
@@ -51,6 +54,7 @@ router.get('/films', function(req, res){//(/films--path parameter)
      
 })
 
+//Problem No 5
 router.get("/films/:filmId" ,function(req,res){
 
 let films= [ {
