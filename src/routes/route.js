@@ -19,8 +19,8 @@ router.get('/give-me-students-data',function(req, res){
 
 })
 
-
-router.get('/missingNumberArray-1',function(req,res){
+//    1st problem
+app.get('/missingNumberArray-1',function(req,res){     //app.get--  Hit localhost:3002/missingNumberArray-2(app.get )
 let array=[1,2,3,4,6,7,8,9]
 
 //solution 1st way
@@ -49,9 +49,9 @@ total=total+array[i]
 
 })
 
+//2nd problem 
 
-
-router.get('/missingNumberArray-2',function(req,res){
+app.get('/missingNumberArray-2',function(req,res){   //app.get--  Hit localhost:3002/missingNumberArray-2(app.get )
 
     let array=[32,33,34,35,37,38,39]
     let total=0
@@ -69,5 +69,10 @@ router.get('/missingNumberArray-2',function(req,res){
      res.send({ data:missingNumber,status:true})
 
 })
+
+app.listen(process.env.PORT || 3002, function() {
+    console.log('Express app running on port ' + (process.env.PORT || 3002))
+})
 module.exports = router;
+
 // adding this comment for no reason
