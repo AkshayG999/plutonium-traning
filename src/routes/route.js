@@ -12,27 +12,6 @@ router.get("/random" , function(req, res) {
 })
 
 
-router.get("/test-api" , function(req, res) {
-    res.send("hi FunctionUp")
-})
-
-
-router.get("/test-api-2" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API")
-})
-
-
-router.get("/test-api-3" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's ")
-})
-
-
-router.get("/test-api-4" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
-})
-
-
-
 router.get("/test-api-5" , function(req, res) {
     res.send("hi FunctionUp5. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
 })
@@ -69,5 +48,65 @@ router.post("/test-post-4", function(req, res) {
     arr.push(ele)
     res.send(  { msg: arr , status: true }  )
 })
+
+
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ],
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ],
+       },
+   ]
+
+   router.post("/test-post-5", function(req, res) {
+     
+    let newPlayer = req.body
+     let newPlayerName = newPlayer.name
+       
+    for (let i=0; i<players.length; i++ ) {
+        if(newPlayerName === players[i].name){
+
+            console.log("This Player Already Exist")
+            break;
+        }
+
+        // if(newPlayerName !== players[i].name)
+       else {
+               players.push(newPlayer)
+
+               console.log("new player add")
+               return res.send(  { data:players }  )
+           }
+       
+       }
+       
+       return res.send(  {status:"This Player Already Exist"  }  )
+
+    
+})
+
 
 module.exports = router;
