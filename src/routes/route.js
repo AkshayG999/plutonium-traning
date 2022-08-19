@@ -11,15 +11,7 @@ router.post("/createAuthor", AuthorController.createAuthor)
 
 router.get('/books_authors',AuthorController.books_authors)
 
-// router.get('/allBookList',UserController.allBookList)
-
-// router.get('/yearList',UserController.yearList)
-
-// router.get('/specificBooks',UserController.specificBooks)
-
-// router.get('/getPriceName',UserController.getPriceName)
-
-// router.get('/randomBooks',UserController.randomBooks)
-// router.get("/getUsersData", UserController.getUsersData)
+router.get('/bookList',AuthorController.bookList)
+router.get('/author_updatePrice',AuthorController.author_updatePrice)
 
 module.exports = router;
