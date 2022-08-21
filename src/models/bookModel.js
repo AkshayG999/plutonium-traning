@@ -7,7 +7,11 @@ const bookSchema = new mongoose.Schema( {
             require :true
         },
         price:Number,
-        ratings:Number
+        ratings:Number,
+        isHotcover:{
+            type:Boolean,
+            default:false
+        }
      
 
      

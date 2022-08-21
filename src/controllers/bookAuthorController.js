@@ -51,13 +51,19 @@ const findBookPrice=async function (req,res){
       console.log(author)
     } 
        
-    return res.send({data:author})
-    
-    
-
-
-     
+    return res.send({data:author})     
  
+}
+
+const updateBook=async function(req,res){
+     
+    const update=await bookModel.updateMany(req.body,{upsert:true })
+    res.send(update)
+    
+}
+
+const hardCover=async function (req,res){
+
 }
 
 module.exports.createAuthor= createAuthor
@@ -66,3 +72,5 @@ module.exports.books_authors= books_authors
 module.exports.bookList=bookList
 module.exports.author_updatePrice=author_updatePrice
 module.exports.findBookPrice=findBookPrice
+module.exports.updateBook=updateBook
+module.exports.hardCover=hardCover
