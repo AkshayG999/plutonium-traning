@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId
  
 
-const userSchema = new mongoose.Schema( {
+const orderSchema = new mongoose.Schema( {
     userId:{
         type: ObjectId,
         ref:"HeaderUser1"
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema( {
     date:Date
 }, { timestamps: true });
 
-module.exports = mongoose.model('HeaderUser1', userSchema) //users
+module.exports = mongoose.model('order', orderSchema) 
 
 
 
