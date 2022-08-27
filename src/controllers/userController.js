@@ -4,14 +4,14 @@ const userModel = require("../models/userModel");
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
 */
-const createUser = async function (abcd, xyz) {
+const createUser = async function (req, res) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
   //the second parameter is always the response
-  let data = abcd.body;
+  let data = req.body;
   let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
-  xyz.send({ msg: savedData });
+  console.log(req.newAtribute);
+  res.send({ msg: savedData });
 };
 
 const loginUser = async function (req, res) {
@@ -34,9 +34,9 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "plutonium",
       organisation: "FunctionUp",
-    },
+    },  
     "functionup-plutonium-very-very-secret-key"
   );
   res.setHeader("x-auth-token", token);
@@ -61,9 +61,6 @@ const getUserData = async function (req, res) {
   // Decoding requires the secret again. 
   // A token can only be decoded successfully if the same secret was used to create(sign) that token.
   // And because this token is only known to the server, it can be assumed that if a token is decoded at server then this token must have been issued by the same server in past.
-  let decodedToken = jwt.verify(token, "functionup-plutonium-very-very-secret-key");
-  if (!decodedToken)
-    return res.send({ status: false, msg: "token is invalid" });
 
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
@@ -88,11 +85,23 @@ const updateUser = async function (req, res) {
   }
 
   let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
-  res.send({ status: updatedUser, data: updatedUser });
+  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData,{new:true});
+  res.send({ status: "UserData is Updated", data: updatedUser });
 };
+
+const deleteUser=async function (req,res){
+  let tokan = req.headers.isdeleted
+  let userid= req.params
+  let id =userid.userId
+  let userId=await userModel.findById(id)
+  userId.isdeleted=tokan
+  await userModel.findOneAndUpdate({_id:id },{$set:{isDeleted:tokan}})
+  res.send({status:true, msg:"your data is successfully deleted"})
+}
+
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.deleteUser = deleteUser;
