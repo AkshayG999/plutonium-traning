@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel")
+ 
 const UserModel= require("../models/userModel")
 
 
@@ -13,6 +13,16 @@ const basicCode= async function(req, res, next) {
     //res.send({ msg: "This is coming from controller (handler)"})
     next()
     }
+
+
+    const createUser=async function (req,res){
+      let data=req.body
+      let freeApp= req.headers.isfreeappuser
+        data.isFreeAppUser=freeApp
+      let userInfo= await UserModel.create(data)
+      res.send({data:userInfo})
+  }
+  
 
 // const createUser= async function (req, res) {
     
@@ -42,11 +52,6 @@ const basicCode= async function(req, res, next) {
 //     let allUsers= await UserModel.find()
 //     res.send({msg: allUsers})
 // }
-const createUser=async function (req,res){
-    let data=req.body
-    let userInfo= await userModel.create(data)
-    res.send({data:userInfo})
-}
 
 module.exports.createUser= createUser
 module.exports.basicCode= basicCode

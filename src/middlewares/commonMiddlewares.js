@@ -1,10 +1,11 @@
 
-const mid1= function ( req, res, next) {
-    req.falana= "hi there. i am adding something new to the req object"
-    console.log("Hi I am a middleware named Mid1")
+const headersCheck= function ( req, res, next) {
+    let freeApp= req.headers.isfreeappuser
+    if(!freeApp)
+    return res.send("Enter isFreeAppUser Header")
     next()
 }
 
  
-module.exports.mid1= mid1
+module.exports.headersCheck= headersCheck
  
