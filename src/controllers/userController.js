@@ -1,17 +1,15 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
-/*
-  Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
-*/
+// __________User Registration_______________________
 const createUser = async function (req, res) {
-  
+
   let data = req.body;
   let savedData = await userModel.create(data);
   console.log(req.newAtribute);
   res.send({ msg: savedData });
 };
-
+//___________User Login & Create Login Token______________
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
   let password = req.body.password;
@@ -21,7 +19,7 @@ const loginUser = async function (req, res) {
     return res.send({
       status: false,
       msg: "username or the password is not corerct",
-    }); 
+    });
   let token = jwt.sign(
     {
       userId: user._id.toString(),
@@ -34,15 +32,8 @@ const loginUser = async function (req, res) {
   res.send({ status: true, token: token });
 };
 
+//________Get User Data ___________________________
 const getUserData = async function (req, res) {
-  let tokan = req.headers["x-auth-token"];
-  if (!tokan) tokan = req.headers["x-auth-token"];
-
-  //If no token is present in the request header return error. This means the user is not logged in.
-  if (!tokan) return res.send({ status: false, msg: "token must be present" });
-
-  console.log(tokan);
-
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
   if (!userDetails)
@@ -52,6 +43,7 @@ const getUserData = async function (req, res) {
   // Note: Try to see what happens if we change the secret while decoding the token
 };
 
+//_________Update User Info______________________________
 const updateUser = async function (req, res) {
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
@@ -64,6 +56,7 @@ const updateUser = async function (req, res) {
   res.send({ status: "UserData is Updated", data: updatedUser });
 };
 
+//_____________Delete User___________________________________
 const deleteUser = async function (req, res) {
   let tokan = req.headers.isdeleted
   let userid = req.params
@@ -74,12 +67,9 @@ const deleteUser = async function (req, res) {
   res.send({ status: true, msg: "your data is successfully deleted" })
 }
 
-
+//_____________Add Message Post_________________________________________
 const postMessage = async function (req, res) {
   let message = req.body.message
-
-  // if(userToBeModified != userLoggedIn) return res.send({status: false, msg: 'User logged is not allowed to modify the requested users data'})
-
   let user = await userModel.findById(req.params.userId)
   if (!user) return res.send({ status: false, msg: 'No such user exists' })
 
