@@ -10,7 +10,7 @@ try{
           return res.status(400).send({status:false , msg:"Fill some neccessary Info "})
   let savedData = await userModel.create(data);
   console.log(req.newAtribute);
-  res.send({ msg: savedData });
+  res.status(201).send({ msg: savedData });
 }
 catch(err){
   res.send({error:err.message})
@@ -39,7 +39,7 @@ try{
   res.status(201).send({ status: true, token: token });
   }
   catch(err){
-    res.send({error:message})
+    res.status(500).send({error:message})
   }
 };
 
@@ -64,7 +64,7 @@ const updateUser = async function (req, res) {
  try{
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
-  //Return an error if no user with the given id exists in the db
+  //Return an error if no user with the given id exists in the dbgit 
   if (!user) {
     return res.status(404).send("No such user exists");
   }
@@ -88,10 +88,10 @@ try{
   let userId = await userModel.findById(id)
   userId.isdeleted = tokan
   await userModel.findOneAndUpdate({ _id: id }, { $set: { isDeleted: tokan } })
-  res.send({ status: true, msg: "your data is successfully deleted" })
+  res.status(200).send({ status: true, msg: "your data is successfully deleted" })
 }
 catch(err){
-  res.send({error:message})
+  res.status(500).send({error:message})
 }
 }
 
@@ -113,7 +113,7 @@ try{
 catch(err){
   res.send({error:message})
 }
-}
+};
 
 
 module.exports.createUser = createUser;

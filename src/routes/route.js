@@ -14,7 +14,7 @@ router.post("/login", userController.loginUser)
 //The userId is sent by front end 
 router.get("/users/:userId", midd.authentication, userController.getUserData)
 
-router.put("/users/:userId", userController.updateUser)// midd.authentication,
+router.put("/users/:userId",midd.authentication, userController.updateUser)// 
 
 router.delete("/users/:userId", midd.authentication, userController.deleteUser)
 
