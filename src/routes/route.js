@@ -7,18 +7,13 @@ router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
-router.post("/users", userController.createUser)
+router.get("/createWheather",  userController.getWeather)
 
-router.post("/login", userController.loginUser)
+router.post("/createMemas", userController.createMeme)
 
-//The userId is sent by front end 
-router.get("/users/:userId", midd.authentication, userController.getUserData)
 
-router.put("/users/:userId",midd.authentication, userController.updateUser)// 
 
-router.delete("/users/:userId", midd.authentication, userController.deleteUser)
 
-router.post("/users/:userId", midd.authentication, userController.postMessage)
 
 
 module.exports = router;
